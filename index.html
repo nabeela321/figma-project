@@ -3,77 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ComplianceAI – Simplifying Compliance For Research Analysts</title>
+  <title>Compliance – Simplifying Compliance For Research Analysts</title>
 
-  <!-- Google Fonts: Inter for body, matching the Figma design -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome for nav icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
   <style>
     /* =============================================
-       CSS CUSTOM PROPERTIES (Design Tokens)
-       ============================================= */
+       DESIGN TOKENS
+    ============================================= */
     :root {
-      --primary:       #3D52D5;   /* Main blue/indigo */
-      --primary-dark:  #2E3FAA;   /* Darker blue for hover */
-      --primary-light: #EEF0FF;   /* Light blue tint */
-      --accent-yellow: #FFC107;   /* Star rating yellow */
-      --text-dark:     #0D0D0D;   /* Main headings */
-      --text-body:     #3B3B3B;   /* Body text */
-      --text-muted:    #6B7280;   /* Secondary text */
-      --bg-hero:       #F5F6FF;   /* Hero section light background */
-      --bg-dark:       #0C0C1D;   /* Why Compliance section dark bg */
-      --bg-white:      #FFFFFF;
-      --border-color:  #E2E5FF;
-      --check-green:   #3D52D5;   /* Checkmark color (blue in design) */
-      --card-shadow:   0 4px 24px rgba(61, 82, 213, 0.10);
-      --radius-btn:    8px;
-      --radius-card:   16px;
-      --font:          'Inter', sans-serif;
+      --blue:        #3D52D5;
+      --blue-dark:   #2A3BB5;
+      --blue-light:  #EEF0FF;
+      --yellow:      #F5A623;
+      --dark-bg:     #0C0C1D;
+      --hero-bg:     #F4F5FF;
+      --text-head:   #111111;
+      --text-body:   #444444;
+      --text-muted:  #777777;
+      --white:       #FFFFFF;
+      --card-shadow: 0 4px 24px rgba(61,82,213,0.10);
+      --radius:      8px;
+      --font:        'Inter', sans-serif;
     }
 
     /* =============================================
-       RESET & BASE
-       ============================================= */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+       RESET
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: var(--font);
-      color: var(--text-dark);
-      background: var(--bg-white);
+      color: var(--text-head);
+      background: #fff;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    ul {
-      list-style: none;
-    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
 
     /* =============================================
-       LAYOUT CONTAINER
-       ============================================= */
+       CONTAINER
+    ============================================= */
     .container {
       width: 100%;
       max-width: 1280px;
@@ -82,21 +57,16 @@
     }
 
     /* =============================================
-       NAVIGATION
-       ============================================= */
+       NAVBAR
+    ============================================= */
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 1000;
-      background: var(--bg-white);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, box-shadow 0.3s;
+      z-index: 999;
+      background: #fff;
+      transition: box-shadow 0.3s;
     }
-
-    .navbar.scrolled {
-      border-bottom-color: var(--border-color);
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-    }
+    .navbar.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
 
     .navbar__inner {
       display: flex;
@@ -109,250 +79,208 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-size: 22px;
       font-weight: 700;
-      color: var(--text-dark);
+      color: var(--text-head);
       flex-shrink: 0;
     }
-
-    .logo__icon {
-      width: 40px;
-      height: 40px;
-      /* SVG magnifying glass with chart - matching Figma logo */
+    .logo img {
+      height: 38px;
+      width: auto;
     }
 
-    /* Desktop Nav Links */
+    /* Desktop nav links */
     .nav__links {
       display: flex;
       align-items: center;
-      gap: 40px;
+      gap: 36px;
     }
-
-    .nav__links a {
+    .nav__links li a {
+      display: flex;
+      align-items: center;
+      gap: 7px;
       font-size: 15px;
       font-weight: 500;
       color: var(--text-body);
       transition: color 0.2s;
-      position: relative;
+    }
+    .nav__links li a:hover { color: var(--blue); }
+    .nav__links li a.active { color: var(--blue); }
+    .nav__links li a img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
     }
 
-    .nav__links a:hover {
-      color: var(--primary);
-    }
-
-    .nav__links a.active {
-      color: var(--primary);
-    }
-
-    /* Contact Us Button */
-    .btn-contact {
+    /* Contact Us button */
+    .btn-nav-contact {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--primary);
+      background: var(--blue);
       color: #fff;
       font-size: 15px;
       font-weight: 600;
-      padding: 12px 24px;
-      border-radius: var(--radius-btn);
+      padding: 12px 22px;
+      border-radius: var(--radius);
       border: none;
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
       white-space: nowrap;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-nav-contact:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .btn-nav-contact img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
     }
 
-    .btn-contact:hover {
-      background: var(--primary-dark);
-      transform: translateY(-1px);
-    }
-
-    .btn-contact i {
-      font-size: 14px;
-    }
-
-    /* Hamburger (mobile) */
+    /* Hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
-      justify-content: center;
       gap: 5px;
       width: 36px;
       height: 36px;
-      cursor: pointer;
       background: none;
       border: none;
+      cursor: pointer;
       padding: 4px;
       z-index: 1100;
     }
-
     .hamburger span {
       display: block;
       width: 24px;
       height: 2px;
-      background: var(--text-dark);
+      background: var(--text-head);
       border-radius: 2px;
       transition: all 0.3s;
     }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* Mobile Menu Overlay */
+    /* =============================================
+       MOBILE MENU DRAWER
+    ============================================= */
     .mobile-menu {
       display: none;
       position: fixed;
       inset: 0;
       z-index: 1050;
-      background: rgba(0,0,0,0.35);
+      background: rgba(0,0,0,0.4);
       opacity: 0;
       transition: opacity 0.3s;
     }
-
-    .mobile-menu.open {
-      display: block;
-      opacity: 1;
-    }
+    .mobile-menu.open { display: block; opacity: 1; }
 
     .mobile-menu__panel {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 88%;
-      max-width: 360px;
+      top: 0; left: 0;
+      width: 85%;
+      max-width: 340px;
       height: 100%;
-      background: var(--bg-white);
-      padding: 28px 24px 40px;
+      background: #fff;
+      padding: 24px 20px 36px;
       display: flex;
       flex-direction: column;
       transform: translateX(-100%);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
     }
+    .mobile-menu.open .mobile-menu__panel { transform: translateX(0); }
 
-    .mobile-menu.open .mobile-menu__panel {
-      transform: translateX(0);
-    }
-
-    .mobile-menu__header {
+    .mobile-menu__head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
-
     .mobile-close {
       background: none;
       border: none;
-      font-size: 22px;
+      font-size: 24px;
       cursor: pointer;
-      color: var(--text-dark);
+      color: var(--text-head);
       line-height: 1;
     }
 
-    .mobile-nav__links {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      flex: 1;
-    }
-
-    .mobile-nav__links a {
+    .mobile-nav__list { flex: 1; }
+    .mobile-nav__list li a {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 18px 0;
+      gap: 14px;
+      padding: 16px 0;
       font-size: 16px;
       font-weight: 500;
       color: var(--text-body);
-      border-bottom: 1px solid #F0F0F0;
+      border-bottom: 1px solid #F0F0F5;
       transition: color 0.2s;
     }
-
-    .mobile-nav__links a.active {
-      color: var(--primary);
-    }
-
-    .mobile-nav__links a i {
+    .mobile-nav__list li a.active { color: var(--blue); }
+    .mobile-nav__list li a img {
       width: 22px;
-      text-align: center;
-      font-size: 18px;
+      height: 22px;
+      object-fit: contain;
     }
 
-    .mobile-menu__cta {
-      margin-top: 32px;
-    }
-
-    .mobile-menu__cta .btn-contact {
+    .mobile-menu__cta { margin-top: 28px; }
+    .mobile-menu__cta .btn-nav-contact {
       width: 100%;
       justify-content: center;
-      padding: 16px 24px;
+      padding: 16px;
       border-radius: 10px;
     }
 
     /* =============================================
        HERO SECTION
-       ============================================= */
+    ============================================= */
     .hero {
-      background: var(--bg-hero);
-      padding: 80px 0 0;
+      background: var(--hero-bg);
+      padding: 70px 0 0;
       overflow: hidden;
-      position: relative;
     }
 
     .hero__inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      gap: 40px;
-      min-height: calc(100vh - 80px - 80px);
+      gap: 32px;
     }
 
-    /* Left content */
-    .hero__content {
-      padding-bottom: 80px;
-    }
+    /* Left */
+    .hero__left { padding-bottom: 70px; }
 
     .hero__title {
-      font-size: clamp(36px, 4.5vw, 60px);
+      font-size: clamp(34px, 4.2vw, 58px);
       font-weight: 800;
-      line-height: 1.12;
+      line-height: 1.13;
       letter-spacing: -0.02em;
-      color: var(--text-dark);
-      margin-bottom: 24px;
+      color: var(--text-head);
+      margin-bottom: 0;
     }
+    .hero__title .blue { color: var(--blue); }
 
-    .hero__title .highlight {
-      color: var(--primary);
-      position: relative;
-      display: inline-block;
-    }
-
-    /* Underline decoration under "Compliance" */
-    .hero__title .highlight::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: var(--primary);
-      border-radius: 2px;
+    /* Underline image below "Compliance" word */
+    .hero__underline {
+      display: block;
+      width: 230px;
+      height: auto;
+      margin-top: -2px;
+      margin-bottom: 4px;
     }
 
     .hero__desc {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.7;
+      font-size: 15.5px;
+      line-height: 1.72;
       color: var(--text-body);
-      margin-bottom: 28px;
-      max-width: 540px;
+      margin-bottom: 26px;
+      max-width: 530px;
+      margin-top: 18px;
     }
 
-    /* Feature checklist */
-    .hero__checklist {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 40px;
-    }
-
+    /* Checklist */
+    .hero__checklist { margin-bottom: 36px; }
     .hero__checklist li {
       display: flex;
       align-items: center;
@@ -360,52 +288,38 @@
       font-size: 15px;
       font-weight: 500;
       color: var(--text-body);
+      margin-bottom: 13px;
     }
-
-    .check-icon {
+    .hero__checklist li:last-child { margin-bottom: 0; }
+    .hero__checklist li img {
       width: 22px;
       height: 22px;
-      background: var(--primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-shrink: 0;
-    }
-
-    .check-icon i {
-      color: #fff;
-      font-size: 11px;
+      object-fit: contain;
     }
 
     /* CTA Buttons */
-    .hero__ctas {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+    .hero__ctas { display: flex; gap: 16px; flex-wrap: wrap; }
 
     .btn-primary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: var(--primary);
+      background: var(--blue);
       color: #fff;
       font-size: 15px;
       font-weight: 600;
-      padding: 14px 32px;
-      border-radius: var(--radius-btn);
+      padding: 14px 36px;
+      border-radius: var(--radius);
       border: none;
       cursor: pointer;
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      min-width: 160px;
+      min-width: 148px;
     }
-
     .btn-primary:hover {
-      background: var(--primary-dark);
+      background: var(--blue-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(61, 82, 213, 0.30);
+      box-shadow: 0 8px 24px rgba(61,82,213,0.28);
     }
 
     .btn-outline {
@@ -413,339 +327,172 @@
       align-items: center;
       justify-content: center;
       background: transparent;
-      color: var(--primary);
+      color: var(--blue);
       font-size: 15px;
       font-weight: 600;
-      padding: 13px 32px;
-      border-radius: var(--radius-btn);
-      border: 1.5px solid var(--primary);
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--blue);
       cursor: pointer;
       transition: background 0.2s, transform 0.15s;
       min-width: 180px;
     }
-
-    .btn-outline:hover {
-      background: var(--primary-light);
-      transform: translateY(-2px);
-    }
+    .btn-outline:hover { background: var(--blue-light); transform: translateY(-2px); }
 
     /* Right visual */
-    .hero__visual {
+    .hero__right {
       position: relative;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      height: 100%;
-      padding-top: 20px;
+      min-height: 520px;
     }
 
-    /* Decorative chevrons (>>>>>>>) top center of hero */
-    .hero__chevrons {
+    /* Vector1 – chevrons top-left of right column */
+    .hero__vector1 {
       position: absolute;
-      top: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-      opacity: 0.35;
+      top: 12px;
+      left: 0;
+      width: 130px;
+      height: auto;
+      z-index: 2;
     }
 
-    .hero__chevrons span {
-      font-size: 22px;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    /* Circular background behind the illustration */
-    .hero__circle-bg {
+    /* Grey blob circle */
+    .hero__blob-circle {
       position: absolute;
-      width: 520px;
-      height: 520px;
-      background: #E8EAFF;
+      width: 480px;
+      height: 460px;
+      background: #D8D9E3;
       border-radius: 50%;
       bottom: 0;
-      right: -20px;
+      right: 0;
       z-index: 0;
     }
 
-    /* The illustration – we use an inline SVG placeholder that mimics the Figma woman figure */
-    .hero__illustration {
+    /* Banner image */
+    .hero__banner-img {
       position: relative;
-      z-index: 1;
-      width: 420px;
+      z-index: 3;
+      width: 100%;
+      max-width: 570px;
       height: auto;
+      object-fit: contain;
     }
 
-    /* Floating stat cards */
-    .stat-card {
-      position: absolute;
-      background: var(--bg-white);
-      border-radius: 14px;
-      box-shadow: var(--card-shadow);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      z-index: 10;
-    }
-
-    .stat-card--trusted {
-      bottom: 80px;
-      left: -10px;
-    }
-
-    .stat-card--rating {
-      top: 120px;
-      right: -10px;
-    }
-
-    .stat-card__icon {
-      width: 44px;
-      height: 44px;
-      background: var(--primary-light);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .stat-card__icon i {
-      color: var(--primary);
-      font-size: 20px;
-    }
-
-    .stat-card__label {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-bottom: 2px;
-    }
-
-    .stat-card__value {
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--primary);
-      line-height: 1;
-    }
-
-    .stat-card__sub {
-      font-size: 12px;
-      color: var(--text-body);
-      font-weight: 600;
-    }
-
-    .stars {
-      display: flex;
-      gap: 2px;
-      margin-bottom: 4px;
-    }
-
-    .stars i {
-      color: var(--accent-yellow);
-      font-size: 13px;
-    }
-
-    .stat-card__rating-value {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--primary);
-      line-height: 1;
+    /* Bottom chevrons below hero */
+    .hero__bottom-vector {
+      width: 110px;
+      height: auto;
+      margin-top: 18px;
+      opacity: 0.5;
     }
 
     /* =============================================
-       WHY COMPLIANCE MATTERS SECTION (dark bg)
-       ============================================= */
-    .compliance-section {
-      background: var(--bg-dark);
-      padding: 100px 0 80px;
+       SECTION 2 – WHY COMPLIANCE MATTERS (LIGHT bg)
+    ============================================= */
+    /*
+      NOTE: The Figma design for Section 2 has a WHITE background
+      with a dark text heading "Why Compliance Matters For Research Analysts".
+      The left side has the illustration, right side has description + 3 cards.
+      The section background is WHITE (not dark). Only the navbar area above
+      it uses the page background color. There is NO dark background in section 2.
+    */
+    .section2 {
+      background: #ffffff;
+      padding: 90px 0 80px;
       position: relative;
       overflow: hidden;
     }
 
-    /* Decorative curl/swirl top-right */
-    .compliance-section__decor-top {
+    /* Decorative curl SVG top-right */
+    .section2__curl {
       position: absolute;
-      top: 40px;
+      top: 36px;
       right: 60px;
-      opacity: 0.5;
+      width: 48px;
+      height: auto;
+      opacity: 0.55;
       pointer-events: none;
     }
 
-    /* Decorative chevrons bottom-left */
-    .compliance-section__chevrons {
+    /* Bottom-left chevrons */
+    .section2__vector-btm {
       position: absolute;
-      bottom: 30px;
-      left: 60px;
-      display: flex;
-      gap: 5px;
+      bottom: 28px;
+      left: 56px;
+      width: 100px;
+      height: auto;
       opacity: 0.25;
     }
 
-    .compliance-section__chevrons span {
-      font-size: 20px;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .compliance-section__inner {
+    .section2__inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      gap: 72px;
       align-items: center;
     }
 
-    /* Left side: title + image */
-    .compliance-section__left {
-      position: relative;
-    }
-
-    .compliance-section__heading {
-      font-size: clamp(28px, 3.5vw, 44px);
+    /* Left column */
+    .section2__title {
+      font-size: clamp(26px, 3.2vw, 42px);
       font-weight: 800;
-      line-height: 1.2;
-      color: #fff;
+      line-height: 1.22;
+      color: var(--text-head);
       margin-bottom: 32px;
     }
+    .section2__title .blue { color: var(--blue); }
 
-    .compliance-section__heading .highlight {
-      color: var(--primary);
+    .section2__img {
+      width: 100%;
+      max-width: 460px;
+      height: auto;
+      object-fit: contain;
     }
 
-    /* Dashboard illustration card */
-    .compliance-illustration {
-      background: #181830;
-      border-radius: 20px;
-      padding: 24px;
-      position: relative;
-    }
-
-    .compliance-illustration__inner {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      padding: 16px;
-    }
-
-    /* Mini chart bars inside the illustration */
-    .mini-chart {
-      display: flex;
-      align-items: flex-end;
-      gap: 6px;
-      height: 80px;
-      margin-bottom: 12px;
-    }
-
-    .mini-chart__bar {
-      flex: 1;
-      border-radius: 4px 4px 0 0;
-      background: var(--primary);
-      opacity: 0.7;
-    }
-
-    .mini-chart__label {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: center;
-      font-weight: 500;
-    }
-
-    .chart-progress {
-      background: #F0F2FF;
-      border-radius: 6px;
-      padding: 10px 12px;
-      margin-top: 10px;
-    }
-
-    .chart-progress__top {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .chart-progress__bar {
-      height: 6px;
-      background: #E0E3FF;
-      border-radius: 3px;
-      overflow: hidden;
-    }
-
-    .chart-progress__bar--fill {
-      height: 100%;
-      width: 50%;
-      background: var(--primary);
-      border-radius: 3px;
-    }
-
-    /* Person sitting illustration at bottom left of card */
-    .compliance-illustration__person {
-      position: absolute;
-      bottom: -10px;
-      right: 20px;
-    }
-
-    /* Plant decorative element */
-    .compliance-illustration__plant {
-      position: absolute;
-      bottom: 0;
-      left: 24px;
-      opacity: 0.8;
-    }
-
-    /* Right side: paragraph + feature cards */
-    .compliance-section__right {
+    /* Right column */
+    .section2__right {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 20px;
     }
 
-    .compliance-section__desc {
+    .section2__desc {
       font-size: 15px;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.65);
-      margin-bottom: 8px;
+      line-height: 1.78;
+      color: var(--text-body);
+      margin-bottom: 6px;
     }
 
     /* Feature cards */
     .feature-card {
-      background: var(--bg-white);
-      border-radius: var(--radius-card);
-      padding: 24px 28px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 24px;
       display: flex;
-      gap: 20px;
       align-items: flex-start;
+      gap: 18px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
       transition: transform 0.2s, box-shadow 0.2s;
     }
-
     .feature-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(61,82,213,0.12);
+      box-shadow: 0 12px 32px rgba(61,82,213,0.13);
     }
 
     .feature-card__icon {
       width: 48px;
       height: 48px;
-      border-radius: 12px;
-      background: var(--primary-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-shrink: 0;
-    }
-
-    .feature-card__icon i {
-      font-size: 20px;
-      color: var(--primary);
+      object-fit: contain;
     }
 
     .feature-card__title {
       font-size: 16px;
       font-weight: 700;
-      color: var(--text-dark);
+      color: var(--text-head);
       margin-bottom: 6px;
     }
-
     .feature-card__desc {
       font-size: 14px;
       line-height: 1.65;
@@ -753,682 +500,603 @@
     }
 
     /* =============================================
-       SCROLL ANIMATION UTILITY
-       ============================================= */
+       FADE ANIMATIONS
+    ============================================= */
     .fade-up {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(30px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
-
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .fade-up-delay-1 { transition-delay: 0.1s; }
-    .fade-up-delay-2 { transition-delay: 0.2s; }
-    .fade-up-delay-3 { transition-delay: 0.3s; }
-    .fade-up-delay-4 { transition-delay: 0.4s; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.10s; }
+    .delay-2 { transition-delay: 0.20s; }
+    .delay-3 { transition-delay: 0.30s; }
+    .delay-4 { transition-delay: 0.40s; }
 
     /* =============================================
-       RESPONSIVE — TABLET (≤ 1024px)
-       ============================================= */
+       RESPONSIVE – TABLET  ≤ 1024px
+    ============================================= */
     @media (max-width: 1024px) {
-      .container {
-        padding: 0 40px;
-      }
-
-      .hero__inner {
-        gap: 24px;
-      }
-
-      .hero__circle-bg {
-        width: 420px;
-        height: 420px;
-      }
-
-      .hero__illustration {
-        width: 340px;
-      }
-
-      .compliance-section__inner {
-        gap: 48px;
-      }
+      .container { padding: 0 40px; }
+      .hero__inner { gap: 20px; }
+      .hero__blob-circle { width: 380px; height: 360px; }
+      .hero__banner-img { max-width: 440px; }
+      .section2__inner { gap: 48px; }
     }
 
     /* =============================================
-       RESPONSIVE — MOBILE (≤ 768px)
-       ============================================= */
+       RESPONSIVE – MOBILE  ≤ 768px
+    ============================================= */
     @media (max-width: 768px) {
-      .container {
-        padding: 0 20px;
-      }
+      .container { padding: 0 20px; }
 
-      /* Nav */
+      /* Nav: hide desktop links, show hamburger */
       .nav__links,
-      .btn-contact.desktop-only {
-        display: none;
-      }
+      .btn-nav-contact.hide-mobile { display: none; }
+      .hamburger { display: flex; }
+      .navbar__inner { height: 64px; }
 
-      .hamburger {
-        display: flex;
-      }
+      /* Hero stacks vertically */
+      .hero { padding: 40px 0 0; }
+      .hero__inner { grid-template-columns: 1fr; text-align: center; }
+      .hero__left { order: 1; padding-bottom: 0; }
+      .hero__right { order: 2; min-height: 320px; }
 
-      .navbar__inner {
-        height: 64px;
-      }
+      .hero__underline { margin: -2px auto 6px; width: 180px; }
+      .hero__desc { font-size: 14.5px; }
+      .hero__checklist li { justify-content: flex-start; text-align: left; }
+      .hero__ctas { justify-content: center; flex-direction: column; align-items: center; }
+      .btn-primary, .btn-outline { width: 100%; max-width: 300px; }
 
-      /* Hero */
-      .hero {
-        padding: 48px 0 0;
-      }
+      .hero__blob-circle { width: 300px; height: 290px; }
+      .hero__banner-img { max-width: 320px; }
+      .hero__vector1 { width: 90px; }
 
-      .hero__inner {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .hero__content {
-        order: 1;
-        padding-bottom: 0;
-      }
-
-      .hero__visual {
-        order: 2;
-        min-height: 340px;
-        margin-top: 32px;
-      }
-
-      .hero__checklist li {
-        justify-content: flex-start;
-        text-align: left;
-      }
-
-      .hero__ctas {
-        justify-content: center;
-      }
-
-      .btn-primary,
-      .btn-outline {
-        width: 100%;
-        max-width: 320px;
-      }
-
-      .hero__desc {
-        font-size: 15px;
-      }
-
-      .hero__circle-bg {
-        width: 320px;
-        height: 320px;
-        right: 50%;
-        transform: translateX(50%);
-      }
-
-      .hero__illustration {
-        width: 260px;
-        margin: 0 auto;
-      }
-
-      .stat-card--trusted {
-        bottom: 20px;
-        left: 0;
-        padding: 12px 14px;
-        gap: 10px;
-      }
-
-      .stat-card--rating {
-        top: 20px;
-        right: 0;
-        padding: 12px 14px;
-        gap: 10px;
-      }
-
-      .stat-card__value {
-        font-size: 18px;
-      }
-
-      .stat-card__rating-value {
-        font-size: 22px;
-      }
-
-      /* Compliance section */
-      .compliance-section {
-        padding: 64px 0 60px;
-      }
-
-      .compliance-section__inner {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .compliance-section__heading {
-        font-size: 28px;
-        margin-bottom: 16px;
-      }
-
-      .compliance-section__decor-top {
-        display: none;
-      }
-
-      .feature-card {
-        padding: 20px;
-      }
+      /* Section 2 stacks */
+      .section2 { padding: 60px 0 56px; }
+      .section2__inner { grid-template-columns: 1fr; gap: 36px; }
+      .section2__title { font-size: 26px; margin-bottom: 20px; }
+      .section2__img { max-width: 100%; }
+      .section2__curl { display: none; }
+      .feature-card { padding: 18px 20px; }
     }
 
     /* =============================================
-       RESPONSIVE — SMALL MOBILE (≤ 480px)
-       ============================================= */
+       RESPONSIVE – SMALL MOBILE  ≤ 480px
+    ============================================= */
     @media (max-width: 480px) {
-      .hero__title {
-        font-size: 30px;
-      }
-
-      .hero__circle-bg {
-        width: 260px;
-        height: 260px;
-      }
-
-      .hero__illustration {
-        width: 200px;
-      }
-
-      .stat-card {
-        padding: 10px 12px;
-        gap: 8px;
-        border-radius: 10px;
-      }
-
-      .stat-card__icon {
-        width: 36px;
-        height: 36px;
-      }
+      .hero__title { font-size: 28px; }
+      .hero__blob-circle { width: 240px; height: 230px; }
+      .hero__banner-img { max-width: 260px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ================================================
-       NAVIGATION BAR
-       ================================================ -->
-  <header class="navbar" id="navbar">
-    <div class="container">
-      <nav class="navbar__inner" aria-label="Primary Navigation">
+<!-- ====================================================
+  HOW TO USE THIS FILE
+  ─────────────────────────────────────────────────────
+  1. Create a folder named "assets" next to this index.html
+  2. Put ALL your image files inside that "assets/" folder
+  3. The file names must match EXACTLY (case-sensitive):
+       assets/Logo.png
+       assets/Home.png
+       assets/AboutUs.png
+       assets/Our_Services.png
+       assets/Pricing.png
+       assets/FAQ.png
+       assets/Contact.png
+       assets/Contact-icon.png
+       assets/Menu.png              (not used in code – kept for reference)
+       assets/Banner_Image.png
+       assets/Vector1.png
+       assets/underline-Vector.png
+       assets/check-sign.png
+       assets/Section2-Image.png
+       assets/Regulatory_Clarity.png
+       assets/Hassle-Free_Filings_Clarity.png
+       assets/Risk_Protection.png
+  4. Open index.html in your browser or run Live Server in VS Code
+==================================================== -->
 
-        <!-- Logo -->
-        <a href="#" class="logo" aria-label="Home">
-          <!-- Inline SVG: magnifying glass with bar chart -->
-          <svg class="logo__icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="17" cy="17" r="13" stroke="#3D52D5" stroke-width="2.5"/>
-            <circle cx="17" cy="17" r="10" fill="#EEF0FF"/>
-            <!-- Bar chart inside lens -->
-            <rect x="11" y="20" width="3" height="5" rx="1" fill="#3D52D5"/>
-            <rect x="15.5" y="17" width="3" height="8" rx="1" fill="#3D52D5"/>
-            <rect x="20" y="14" width="3" height="11" rx="1" fill="#3D52D5"/>
-            <!-- Handle -->
-            <line x1="27" y1="27" x2="33" y2="33" stroke="#3D52D5" stroke-width="2.8" stroke-linecap="round"/>
-          </svg>
-          Logo
-        </a>
+<!-- ====================================================
+     NAVBAR
+==================================================== -->
+<header class="navbar" id="navbar">
+  <div class="container">
+    <nav class="navbar__inner" aria-label="Main navigation">
 
-        <!-- Desktop Navigation Links -->
-        <ul class="nav__links" role="list">
-          <li><a href="#" class="active">Home</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Our Services</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
+      <!--
+        ══════════════════════════════════════════
+        LOGO
+        FILE : assets/Logo.png
+        SIZE : height 38px (auto width)
+        ══════════════════════════════════════════
+      -->
+      <a href="#" class="logo" aria-label="Go to homepage">
+        <img src="assets/Logo.png" alt="Company Logo" />
+      </a>
 
-        <!-- Desktop CTA Button -->
-        <a href="#" class="btn-contact desktop-only" aria-label="Contact Us">
-          <i class="fas fa-phone" aria-hidden="true"></i>
-          Contact Us
-        </a>
-
-        <!-- Hamburger Button (mobile only) -->
-        <button class="hamburger" id="hamburger" aria-label="Open Menu" aria-expanded="false" aria-controls="mobile-menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-      </nav>
-    </div>
-  </header>
-
-  <!-- ================================================
-       MOBILE MENU OVERLAY
-       ================================================ -->
-  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
-    <div class="mobile-menu__panel">
-      <!-- Panel Header -->
-      <div class="mobile-menu__header">
-        <a href="#" class="logo" aria-label="Home">
-          <svg class="logo__icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="17" cy="17" r="13" stroke="#3D52D5" stroke-width="2.5"/>
-            <circle cx="17" cy="17" r="10" fill="#EEF0FF"/>
-            <rect x="11" y="20" width="3" height="5" rx="1" fill="#3D52D5"/>
-            <rect x="15.5" y="17" width="3" height="8" rx="1" fill="#3D52D5"/>
-            <rect x="20" y="14" width="3" height="11" rx="1" fill="#3D52D5"/>
-            <line x1="27" y1="27" x2="33" y2="33" stroke="#3D52D5" stroke-width="2.8" stroke-linecap="round"/>
-          </svg>
-          Logo
-        </a>
-        <button class="mobile-close" id="mobile-close" aria-label="Close Menu">&#10005;</button>
-      </div>
-
-      <!-- Panel Nav Links (with icons matching Figma) -->
-      <ul class="mobile-nav__links" role="list">
-        <li><a href="#" class="active"><i class="fas fa-house" aria-hidden="true"></i> Home</a></li>
-        <li><a href="#"><i class="fas fa-circle-info" aria-hidden="true"></i> About Us</a></li>
-        <li><a href="#"><i class="fas fa-gears" aria-hidden="true"></i> Our Services</a></li>
-        <li><a href="#"><i class="fas fa-tag" aria-hidden="true"></i> Pricing</a></li>
-        <li><a href="#"><i class="fas fa-circle-question" aria-hidden="true"></i> FAQ</a></li>
-        <li><a href="#"><i class="fas fa-address-book" aria-hidden="true"></i> Contact</a></li>
+      <!--
+        ══════════════════════════════════════════
+        DESKTOP NAV LINKS
+        FILES:
+          assets/Home.png
+          assets/AboutUs.png
+          assets/Our_Services.png
+          assets/Pricing.png
+          assets/FAQ.png
+          assets/Contact.png
+        ══════════════════════════════════════════
+      -->
+      <ul class="nav__links" role="list">
+        <li>
+          <a href="#" class="active" aria-current="page">
+            <img src="assets/Home.png" alt="" aria-hidden="true" />
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="assets/AboutUs.png" alt="" aria-hidden="true" />
+            About Us
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="assets/Our_Services.png" alt="" aria-hidden="true" />
+            Our Services
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="assets/Pricing.png" alt="" aria-hidden="true" />
+            Pricing
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="assets/FAQ.png" alt="" aria-hidden="true" />
+            FAQ
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="assets/Contact.png" alt="" aria-hidden="true" />
+            Contact
+          </a>
+        </li>
       </ul>
 
-      <!-- CTA at bottom of panel -->
-      <div class="mobile-menu__cta">
-        <a href="#" class="btn-contact">
-          <i class="fas fa-phone" aria-hidden="true"></i>
-          Contact Us
+      <!--
+        ══════════════════════════════════════════
+        CONTACT US BUTTON
+        FILE : assets/Contact-icon.png  (phone icon)
+        ══════════════════════════════════════════
+      -->
+      <a href="#" class="btn-nav-contact hide-mobile" aria-label="Contact Us">
+        <img src="assets/Contact-icon.png" alt="" aria-hidden="true" />
+        Contact Us
+      </a>
+
+      <!-- Hamburger (mobile only) -->
+      <button
+        class="hamburger"
+        id="hamburger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </nav>
+  </div>
+</header>
+
+<!-- ====================================================
+     MOBILE MENU DRAWER
+==================================================== -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <div class="mobile-menu__panel">
+
+    <!-- Panel header: logo + close -->
+    <div class="mobile-menu__head">
+      <a href="#" class="logo">
+        <!-- FILE: assets/Logo.png -->
+        <img src="assets/Logo.png" alt="Logo" />
+      </a>
+      <button class="mobile-close" id="mobileClose" aria-label="Close menu">&#10005;</button>
+    </div>
+
+    <!--
+      MOBILE NAV LINKS
+      Same assets as desktop nav above
+    -->
+    <ul class="mobile-nav__list" role="list">
+      <li>
+        <a href="#" class="active">
+          <!-- FILE: assets/Home.png -->
+          <img src="assets/Home.png" alt="" aria-hidden="true" />
+          Home
         </a>
+      </li>
+      <li>
+        <a href="#">
+          <!-- FILE: assets/AboutUs.png -->
+          <img src="assets/AboutUs.png" alt="" aria-hidden="true" />
+          About Us
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <!-- FILE: assets/Our_Services.png -->
+          <img src="assets/Our_Services.png" alt="" aria-hidden="true" />
+          Our Services
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <!-- FILE: assets/Pricing.png -->
+          <img src="assets/Pricing.png" alt="" aria-hidden="true" />
+          Pricing
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <!-- FILE: assets/FAQ.png -->
+          <img src="assets/FAQ.png" alt="" aria-hidden="true" />
+          FAQ
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <!-- FILE: assets/Contact.png -->
+          <img src="assets/Contact.png" alt="" aria-hidden="true" />
+          Contact
+        </a>
+      </li>
+    </ul>
+
+    <!-- Mobile CTA -->
+    <div class="mobile-menu__cta">
+      <a href="#" class="btn-nav-contact">
+        <!-- FILE: assets/Contact-icon.png -->
+        <img src="assets/Contact-icon.png" alt="" aria-hidden="true" />
+        Contact Us
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ====================================================
+     SECTION 1 – HERO
+==================================================== -->
+<section class="hero" aria-labelledby="heroHeading">
+  <div class="container">
+    <div class="hero__inner">
+
+      <!-- ── LEFT CONTENT ── -->
+      <div class="hero__left">
+
+        <!--
+          HEADING STRUCTURE (matches Figma exactly):
+          Line 1: "Simplifying"
+          Line 2: "Compliance" (blue) + " For"
+          Underline image right below line 2
+          Line 3: "Research Analysts"
+        -->
+        <h1 class="hero__title fade-up" id="heroHeading">
+          Simplifying<br>
+          <span class="blue">Compliance</span> For
+        </h1>
+
+        <!--
+          ══════════════════════════════════════════
+          UNDERLINE VECTOR
+          FILE : assets/underline-Vector.png
+          This is the blue brush-stroke/wavy underline
+          that appears under the word "Compliance" in the heading.
+          Adjust width in CSS (.hero__underline { width: 230px })
+          to match the visual width of "Compliance" at your screen size.
+          ══════════════════════════════════════════
+        -->
+        <img
+          src="assets/underline-Vector.png"
+          alt=""
+          aria-hidden="true"
+          class="hero__underline"
+        />
+
+        <h1 class="hero__title fade-up delay-1" style="margin-top: 2px;">
+          Research Analysts
+        </h1>
+
+        <!-- Description -->
+        <p class="hero__desc fade-up delay-2">
+          Stay Focused On Your Insights—We'll Handle The Compliance. Our Expert
+          Solutions Ensure Your Research Practices Meet Every Regulatory
+          Requirement With Confidence And Ease
+        </p>
+
+        <!--
+          CHECKLIST
+          FILE : assets/check-sign.png  (blue circle checkmark)
+          Used 3 times – one per list item
+        -->
+        <ul class="hero__checklist fade-up delay-2" aria-label="Key benefits">
+          <li>
+            <img src="assets/check-sign.png" alt="✓" />
+            End-To-End Compliance Support
+          </li>
+          <li>
+            <img src="assets/check-sign.png" alt="✓" />
+            Regulatory Filings Made Simple
+          </li>
+          <li>
+            <img src="assets/check-sign.png" alt="✓" />
+            Tailored Solutions For Independent Analysts &amp; Firms
+          </li>
+        </ul>
+
+        <!-- CTA Buttons -->
+        <div class="hero__ctas fade-up delay-3">
+          <a href="#" class="btn-primary" role="button">Get Started</a>
+          <a href="#" class="btn-outline" role="button">Book A Consultation</a>
+        </div>
+
       </div>
+      <!-- /hero left -->
+
+      <!-- ── RIGHT VISUAL ── -->
+      <div class="hero__right" aria-hidden="true">
+
+        <!--
+          ══════════════════════════════════════════
+          VECTOR 1 – Chevrons (top area of right column)
+          FILE : assets/Vector1.png
+          Light purple >>>>> arrows, decorative
+          ══════════════════════════════════════════
+        -->
+        <img
+          src="assets/Vector1.png"
+          alt=""
+          class="hero__vector1"
+        />
+
+        <!-- Grey circular blob background (CSS only, no image needed) -->
+        <div class="hero__blob-circle"></div>
+
+        <!--
+          ══════════════════════════════════════════
+          BANNER IMAGE (main hero illustration)
+          FILE : assets/Banner_Image.png
+          This PNG from Figma contains:
+            - The woman standing holding a laptop
+            - The grey/dark blob background shape
+            - Floating card: "Trusted By 250+ Professionals"
+            - Floating card: "4.8 ★★★★★ Clients Rating"
+            - Small briefcase bottom-right
+          It is the entire right-column visual as one image.
+          ══════════════════════════════════════════
+        -->
+        <img
+          src="assets/Banner_Image.png"
+          alt="Research analyst illustration with compliance statistics"
+          class="hero__banner-img"
+        />
+
+      </div>
+      <!-- /hero right -->
+
+    </div>
+
+    <!--
+      BOTTOM DECORATIVE CHEVRONS (below left column, above section 2)
+      FILE : assets/Vector1.png  (same file reused)
+    -->
+    <img
+      src="assets/Vector1.png"
+      alt=""
+      aria-hidden="true"
+      class="hero__bottom-vector"
+    />
+
+  </div>
+</section>
+
+<!-- ====================================================
+     SECTION 2 – WHY COMPLIANCE MATTERS
+     Background: WHITE (light, not dark)
+     Left: Title + Section2-Image illustration
+     Right: Description paragraph + 3 feature cards
+==================================================== -->
+<section class="section2" aria-labelledby="section2Heading">
+
+  <!--
+    Decorative curl SVG – top right (pure CSS SVG, no asset file needed)
+  -->
+  <svg class="section2__curl" viewBox="0 0 50 80" fill="none" aria-hidden="true">
+    <path d="M45 5 C58 22 60 50 38 68 C22 82 4 76 2 60"
+      stroke="#3D52D5" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    <path d="M35 10 C48 27 50 55 28 73 C12 87 -6 81 -8 65"
+      stroke="#3D52D5" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.4"/>
+  </svg>
+
+  <!--
+    Bottom-left decorative chevrons
+    FILE : assets/Vector1.png  (reused)
+  -->
+  <img
+    src="assets/Vector1.png"
+    alt=""
+    aria-hidden="true"
+    class="section2__vector-btm"
+  />
+
+  <div class="container">
+    <div class="section2__inner">
+
+      <!-- LEFT: Heading + illustration -->
+      <div class="section2__left fade-up">
+
+        <h2 class="section2__title" id="section2Heading">
+          Why <span class="blue">Compliance<br>Matters</span> For<br>
+          Research Analysts
+        </h2>
+
+        <!--
+          ══════════════════════════════════════════
+          SECTION 2 ILLUSTRATION
+          FILE : assets/Section2-Image.png
+          Shows a woman sitting on a beanbag chair with a laptop,
+          in front of a large analytics dashboard screen.
+          A plant sits in the bottom-left of the image.
+          ══════════════════════════════════════════
+        -->
+        <img
+          src="assets/Section2-Image.png"
+          alt="Compliance dashboard with analyst illustration"
+          class="section2__img"
+        />
+
+      </div>
+
+      <!-- RIGHT: Description + feature cards -->
+      <div class="section2__right">
+
+        <p class="section2__desc fade-up delay-1">
+          In Today's Regulatory Environment, Even A Small Oversight Can Lead To
+          Penalties, Reputational Risks, And Loss Of Client Trust. We Help Research
+          Analysts And Firms Navigate Complex Compliance Requirements So They
+          Can Focus On Delivering High-Quality Research Without Worry.
+        </p>
+
+        <!-- ─ CARD 1: Regulatory Clarity ─────────────────
+          ══════════════════════════════════════════
+          ICON FILE : assets/Regulatory_Clarity.png
+          Icon shows a magnifying glass with a settings gear
+          ══════════════════════════════════════════
+        -->
+        <div class="feature-card fade-up delay-1">
+          <img
+            src="assets/Regulatory_Clarity.png"
+            alt=""
+            aria-hidden="true"
+            class="feature-card__icon"
+          />
+          <div>
+            <h3 class="feature-card__title">Regulatory Clarity</h3>
+            <p class="feature-card__desc">
+              We Decode Complex Compliance Rules Into Simple, Actionable Steps.
+            </p>
+          </div>
+        </div>
+
+        <!-- ─ CARD 2: Hassle-Free Filings Clarity ────────
+          ══════════════════════════════════════════
+          ICON FILE : assets/Hassle-Free_Filings_Clarity.png
+          Icon shows a document / file symbol
+          ══════════════════════════════════════════
+        -->
+        <div class="feature-card fade-up delay-2">
+          <img
+            src="assets/Hassle-Free_Filings_Clarity.png"
+            alt=""
+            aria-hidden="true"
+            class="feature-card__icon"
+          />
+          <div>
+            <h3 class="feature-card__title">Hassle-Free Filings Clarity</h3>
+            <p class="feature-card__desc">
+              From Registration To Ongoing Reporting—We Manage It End-To-End.
+            </p>
+          </div>
+        </div>
+
+        <!-- ─ CARD 3: Risk Protection ─────────────────────
+          ══════════════════════════════════════════
+          ICON FILE : assets/Risk_Protection.png
+          Icon shows a shield with a gear/cog inside
+          ══════════════════════════════════════════
+        -->
+        <div class="feature-card fade-up delay-3">
+          <img
+            src="assets/Risk_Protection.png"
+            alt=""
+            aria-hidden="true"
+            class="feature-card__icon"
+          />
+          <div>
+            <h3 class="feature-card__title">Risk Protection</h3>
+            <p class="feature-card__desc">
+              Stay Ahead Of Audits, Inspections, And Compliance Gaps With Proactive Support.
+            </p>
+          </div>
+        </div>
+
+      </div>
+      <!-- /section2 right -->
+
     </div>
   </div>
+</section>
 
-  <!-- ================================================
-       HERO SECTION
-       ================================================ -->
-  <section class="hero" aria-labelledby="hero-heading">
-    <div class="container">
-      <div class="hero__inner">
+<!-- ====================================================
+     JAVASCRIPT
+==================================================== -->
+<script>
+  // ── Sticky navbar shadow on scroll ─────────────────
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
 
-        <!-- LEFT: Text Content -->
-        <div class="hero__content">
+  // ── Mobile menu open / close ────────────────────────
+  const hamburger   = document.getElementById('hamburger');
+  const mobileMenu  = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
 
-          <!-- Main Heading -->
-          <h1 class="hero__title fade-up" id="hero-heading">
-            Simplifying<br>
-            <span class="highlight">Compliance</span> For<br>
-            Research Analysts
-          </h1>
+  function openMenu() {
+    mobileMenu.classList.add('open');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
 
-          <!-- Description -->
-          <p class="hero__desc fade-up fade-up-delay-1">
-            Stay Focused On Your Insights—We'll Handle The Compliance.
-            Our Expert Solutions Ensure Your Research Practices Meet Every
-            Regulatory Requirement With Confidence And Ease
-          </p>
+  hamburger.addEventListener('click', openMenu);
+  mobileClose.addEventListener('click', closeMenu);
+  // Close when clicking the dark overlay behind the panel
+  mobileMenu.addEventListener('click', e => {
+    if (e.target === mobileMenu) closeMenu();
+  });
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
 
-          <!-- Feature Checklist -->
-          <ul class="hero__checklist fade-up fade-up-delay-2" aria-label="Key Benefits">
-            <li>
-              <span class="check-icon" aria-hidden="true"><i class="fas fa-check"></i></span>
-              End-To-End Compliance Support
-            </li>
-            <li>
-              <span class="check-icon" aria-hidden="true"><i class="fas fa-check"></i></span>
-              Regulatory Filings Made Simple
-            </li>
-            <li>
-              <span class="check-icon" aria-hidden="true"><i class="fas fa-check"></i></span>
-              Tailored Solutions For Independent Analysts &amp; Firms
-            </li>
-          </ul>
-
-          <!-- CTA Buttons -->
-          <div class="hero__ctas fade-up fade-up-delay-3">
-            <a href="#" class="btn-primary" role="button">Get Started</a>
-            <a href="#" class="btn-outline" role="button">Book A Consultation</a>
-          </div>
-
-        </div>
-
-        <!-- RIGHT: Illustration + Floating Stats -->
-        <div class="hero__visual" aria-hidden="true">
-
-          <!-- Decorative chevrons -->
-          <div class="hero__chevrons">
-            <span>›</span><span>›</span><span>›</span>
-            <span>›</span><span>›</span><span>›</span>
-          </div>
-
-          <!-- Circular background -->
-          <div class="hero__circle-bg"></div>
-
-          <!-- SVG Illustration: Woman with laptop (matching Figma style) -->
-          <svg class="hero__illustration" viewBox="0 0 420 500" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a professional analyst with a laptop">
-            <!-- Body -->
-            <ellipse cx="210" cy="470" rx="130" ry="30" fill="#D8DCFF" opacity="0.4"/>
-
-            <!-- Legs - wide trousers (blue/indigo) -->
-            <path d="M170 320 L155 470 L190 470 L205 360 L220 470 L255 470 L240 320 Z" fill="#4A5BE0"/>
-
-            <!-- Torso - dark navy top -->
-            <path d="M165 220 C155 240 148 280 152 320 L250 320 C254 280 248 240 235 220 Z" fill="#1C1F3A"/>
-
-            <!-- Right arm holding laptop - extended outward -->
-            <path d="M165 230 C148 240 138 260 135 280 L162 285 C163 268 168 252 178 242 Z" fill="#1C1F3A"/>
-
-            <!-- Left arm up gesturing -->
-            <path d="M235 225 C248 215 262 210 270 220 C275 228 268 238 258 240 L240 250 Z" fill="#F4A87C"/>
-
-            <!-- Laptop body -->
-            <rect x="118" y="270" width="80" height="52" rx="4" fill="#4A5BE0"/>
-            <rect x="122" y="274" width="72" height="44" rx="2" fill="#7B8EFF"/>
-            <!-- Laptop screen content lines -->
-            <rect x="126" y="278" width="40" height="3" rx="1.5" fill="#fff" opacity="0.6"/>
-            <rect x="126" y="284" width="30" height="3" rx="1.5" fill="#fff" opacity="0.4"/>
-            <rect x="126" y="290" width="35" height="3" rx="1.5" fill="#fff" opacity="0.4"/>
-            <!-- Laptop base -->
-            <path d="M110 322 L110 325 C110 327 112 328 114 328 L204 328 C206 328 208 327 208 325 L208 322 Z" fill="#3A4BC8"/>
-
-            <!-- Neck -->
-            <rect x="200" y="178" width="22" height="28" rx="8" fill="#F4A87C"/>
-
-            <!-- Head -->
-            <ellipse cx="211" cy="165" rx="32" ry="35" fill="#F4A87C"/>
-
-            <!-- Hair - long dark hair -->
-            <path d="M179 155 C176 130 185 110 211 108 C237 108 248 130 245 155 C248 145 252 130 248 115 C242 95 225 84 211 84 C197 84 180 95 174 115 C170 130 174 145 179 155 Z" fill="#2C1810"/>
-            <!-- Hair sides flowing down -->
-            <path d="M179 155 C172 170 170 195 172 220 L185 218 C183 196 184 175 189 162 Z" fill="#2C1810"/>
-            <path d="M243 155 C250 170 252 195 250 220 L237 218 C239 196 238 175 233 162 Z" fill="#2C1810"/>
-
-            <!-- Face details -->
-            <!-- Eyes -->
-            <ellipse cx="200" cy="162" rx="4" ry="4.5" fill="#fff"/>
-            <ellipse cx="222" cy="162" rx="4" ry="4.5" fill="#fff"/>
-            <ellipse cx="201" cy="163" rx="2.5" ry="3" fill="#2C1810"/>
-            <ellipse cx="223" cy="163" rx="2.5" ry="3" fill="#2C1810"/>
-            <!-- Eyebrows -->
-            <path d="M196 156 Q200 153 204 156" stroke="#2C1810" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <path d="M218 156 Q222 153 226 156" stroke="#2C1810" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <!-- Smile -->
-            <path d="M204 172 Q211 177 218 172" stroke="#D4896A" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <!-- Nose -->
-            <path d="M209 166 Q211 170 213 166" stroke="#D4896A" stroke-width="1" fill="none"/>
-
-            <!-- Pocket detail on shirt -->
-            <rect x="210" y="240" width="18" height="14" rx="3" fill="#2C3160" stroke="#3D52D5" stroke-width="1"/>
-
-            <!-- Shoes / feet -->
-            <ellipse cx="168" cy="472" rx="16" ry="8" fill="#1C1F3A"/>
-            <ellipse cx="243" cy="472" rx="16" ry="8" fill="#1C1F3A"/>
-
-            <!-- Suitcase/briefcase bottom right (decorative) -->
-            <rect x="300" y="400" width="80" height="60" rx="8" fill="#D8DCFF" stroke="#B0BAFF" stroke-width="1.5"/>
-            <rect x="318" y="392" width="44" height="12" rx="4" fill="none" stroke="#B0BAFF" stroke-width="1.5"/>
-            <line x1="300" y1="430" x2="380" y2="430" stroke="#B0BAFF" stroke-width="1.5"/>
-            <rect x="333" y="424" width="14" height="12" rx="2" fill="#B0BAFF"/>
-          </svg>
-
-          <!-- Floating Card: Trusted By 250+ Professionals -->
-          <div class="stat-card stat-card--trusted" aria-label="Trusted by 250+ Professionals">
-            <div class="stat-card__icon">
-              <i class="fas fa-briefcase" aria-hidden="true"></i>
-            </div>
-            <div>
-              <p class="stat-card__label">Trusted By</p>
-              <p class="stat-card__value">250+</p>
-              <p class="stat-card__sub">Professionals</p>
-            </div>
-          </div>
-
-          <!-- Floating Card: 4.8 Clients Rating -->
-          <div class="stat-card stat-card--rating" aria-label="4.8 out of 5 stars client rating">
-            <div>
-              <div class="stars" aria-label="5 star rating">
-                <i class="fas fa-star" aria-hidden="true"></i>
-                <i class="fas fa-star" aria-hidden="true"></i>
-                <i class="fas fa-star" aria-hidden="true"></i>
-                <i class="fas fa-star" aria-hidden="true"></i>
-                <i class="fas fa-star" aria-hidden="true"></i>
-              </div>
-              <p class="stat-card__rating-value">4.8</p>
-              <p class="stat-card__sub">Clients Rating</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom decorative chevrons on hero -->
-    <div style="padding: 24px 80px 0; display:flex; gap:6px; opacity:0.3;">
-      <span style="font-size:20px; color:var(--primary); font-weight:700;">›</span>
-      <span style="font-size:20px; color:var(--primary); font-weight:700;">›</span>
-      <span style="font-size:20px; color:var(--primary); font-weight:700;">›</span>
-      <span style="font-size:20px; color:var(--primary); font-weight:700;">›</span>
-      <span style="font-size:20px; color:var(--primary); font-weight:700;">›</span>
-    </div>
-  </section>
-
-  <!-- ================================================
-       WHY COMPLIANCE MATTERS SECTION
-       ================================================ -->
-  <section class="compliance-section" aria-labelledby="compliance-heading">
-
-    <!-- Decorative curl top-right -->
-    <div class="compliance-section__decor-top" aria-hidden="true">
-      <svg width="60" height="80" viewBox="0 0 60 80" fill="none">
-        <path d="M50 5 C60 20 65 45 45 65 C30 80 10 75 5 60" stroke="#3D52D5" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
-        <path d="M40 10 C50 25 55 50 35 70 C20 85 0 80 -5 65" stroke="#3D52D5" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
-      </svg>
-    </div>
-
-    <!-- Decorative chevrons bottom-left -->
-    <div class="compliance-section__chevrons" aria-hidden="true">
-      <span>›</span><span>›</span><span>›</span><span>›</span><span>›</span>
-    </div>
-
-    <div class="container">
-      <div class="compliance-section__inner">
-
-        <!-- LEFT: Heading + Illustration -->
-        <div class="compliance-section__left fade-up">
-
-          <!-- Section Heading -->
-          <h2 class="compliance-section__heading" id="compliance-heading">
-            Why <span class="highlight">Compliance<br>Matters</span> For<br>Research Analysts
-          </h2>
-
-          <!-- Dashboard / Chart Illustration Card -->
-          <div class="compliance-illustration" role="img" aria-label="Compliance dashboard illustration">
-            <div class="compliance-illustration__inner">
-              <!-- Mini bar chart -->
-              <div class="mini-chart" aria-hidden="true">
-                <div>
-                  <div class="mini-chart__bar" style="height:30px; opacity:0.4;"></div>
-                  <div class="mini-chart__label">Jan</div>
-                </div>
-                <div>
-                  <div class="mini-chart__bar" style="height:50px; opacity:0.5;"></div>
-                  <div class="mini-chart__label">Feb</div>
-                </div>
-                <div>
-                  <div class="mini-chart__bar" style="height:40px; opacity:0.6;"></div>
-                  <div class="mini-chart__label">Mar</div>
-                </div>
-                <div>
-                  <div class="mini-chart__bar" style="height:65px; opacity:0.75;"></div>
-                  <div class="mini-chart__label">Apr</div>
-                </div>
-                <div>
-                  <div class="mini-chart__bar" style="height:55px;"></div>
-                  <div class="mini-chart__label">May</div>
-                </div>
-                <div>
-                  <div class="mini-chart__bar" style="height:75px;"></div>
-                  <div class="mini-chart__label">Jun</div>
-                </div>
-              </div>
-
-              <!-- Progress indicator -->
-              <div class="chart-progress">
-                <div class="chart-progress__top">
-                  <span>Compliance Score</span>
-                  <span style="font-weight:700; color:var(--primary);">50 / 100</span>
-                </div>
-                <div class="chart-progress__bar">
-                  <div class="chart-progress__bar--fill"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Person with laptop sitting in front of screen (SVG) -->
-            <svg class="compliance-illustration__person" width="120" height="100" viewBox="0 0 120 100" fill="none" aria-hidden="true">
-              <!-- Sitting bean bag -->
-              <ellipse cx="60" cy="88" rx="38" ry="12" fill="#E8EAFF"/>
-              <!-- Legs -->
-              <path d="M38 70 C30 80 35 90 42 90 L55 90 L58 72 Z" fill="#4A5BE0"/>
-              <path d="M82 70 C90 80 85 90 78 90 L65 90 L62 72 Z" fill="#4A5BE0"/>
-              <!-- Body -->
-              <path d="M38 45 C36 55 36 68 38 72 L82 72 C84 68 84 55 82 45 Z" fill="#1C1F3A"/>
-              <!-- Head -->
-              <ellipse cx="60" cy="35" rx="16" ry="18" fill="#F4A87C"/>
-              <!-- Hair -->
-              <path d="M44 28 C42 18 50 10 60 10 C70 10 78 18 76 28 C78 22 80 12 72 6 C66 2 54 2 48 6 C40 12 42 22 44 28 Z" fill="#2C1810"/>
-              <!-- Laptop in lap -->
-              <rect x="30" y="62" width="60" height="18" rx="3" fill="#4A5BE0"/>
-              <rect x="33" y="64" width="54" height="13" rx="2" fill="#7B8EFF"/>
-              <rect x="36" y="66" width="25" height="2" rx="1" fill="#fff" opacity="0.5"/>
-              <rect x="36" y="70" width="18" height="2" rx="1" fill="#fff" opacity="0.4"/>
-              <!-- Plant at left -->
-              <path d="M8 95 C8 78 18 68 20 60 C22 68 22 78 22 95 Z" fill="#4CAF50" opacity="0.7"/>
-              <path d="M20 60 C14 52 5 52 5 60 C5 68 14 66 20 60 Z" fill="#66BB6A" opacity="0.8"/>
-              <path d="M20 65 C26 57 35 57 35 65 C35 73 26 71 20 65 Z" fill="#66BB6A" opacity="0.8"/>
-              <rect x="17" y="90" width="6" height="8" rx="2" fill="#8D6E63"/>
-            </svg>
-
-          </div>
-        </div>
-
-        <!-- RIGHT: Description + Feature Cards -->
-        <div class="compliance-section__right">
-
-          <p class="compliance-section__desc fade-up fade-up-delay-1">
-            In Today's Regulatory Environment, Even A Small Oversight Can Lead To
-            Penalties, Reputational Risks, And Loss Of Client Trust. We Help Research
-            Analysts And Firms Navigate Complex Compliance Requirements So They
-            Can Focus On Delivering High-Quality Research Without Worry.
-          </p>
-
-          <!-- Feature Card 1: Regulatory Clarity -->
-          <div class="feature-card fade-up fade-up-delay-1">
-            <div class="feature-card__icon">
-              <!-- Magnifying glass icon -->
-              <i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i>
-            </div>
-            <div>
-              <h3 class="feature-card__title">Regulatory Clarity</h3>
-              <p class="feature-card__desc">
-                We Decode Complex Compliance Rules Into Simple, Actionable Steps.
-              </p>
-            </div>
-          </div>
-
-          <!-- Feature Card 2: Hassle-Free Filings Clarity -->
-          <div class="feature-card fade-up fade-up-delay-2">
-            <div class="feature-card__icon">
-              <!-- Document icon -->
-              <i class="fas fa-file-lines" aria-hidden="true"></i>
-            </div>
-            <div>
-              <h3 class="feature-card__title">Hassle-Free Filings Clarity</h3>
-              <p class="feature-card__desc">
-                From Registration To Ongoing Reporting—We Manage It End-To-End.
-              </p>
-            </div>
-          </div>
-
-          <!-- Feature Card 3: Risk Protection -->
-          <div class="feature-card fade-up fade-up-delay-3">
-            <div class="feature-card__icon">
-              <!-- Shield icon -->
-              <i class="fas fa-shield-halved" aria-hidden="true"></i>
-            </div>
-            <div>
-              <h3 class="feature-card__title">Risk Protection</h3>
-              <p class="feature-card__desc">
-                Stay Ahead Of Audits, Inspections, And Compliance Gaps With Proactive Support.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================================================
-       JAVASCRIPT: Navbar scroll, mobile menu, fade-in
-       ================================================ -->
-  <script>
-    // ── Sticky Navbar shadow on scroll ──────────────────
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 10) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    }, { passive: true });
-
-    // ── Mobile Menu Toggle ───────────────────────────────
-    const hamburger    = document.getElementById('hamburger');
-    const mobileMenu   = document.getElementById('mobile-menu');
-    const mobileClose  = document.getElementById('mobile-close');
-
-    function openMenu() {
-      mobileMenu.classList.add('open');
-      hamburger.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden'; // prevent scroll behind overlay
-    }
-
-    function closeMenu() {
-      mobileMenu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-
-    hamburger.addEventListener('click', openMenu);
-    mobileClose.addEventListener('click', closeMenu);
-
-    // Close when clicking outside the panel
-    mobileMenu.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) closeMenu();
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        closeMenu();
+  // ── Scroll fade-up animations ────────────────────────
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
     });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    // ── Intersection Observer: Fade-up animations ────────
-    const fadeElements = document.querySelectorAll('.fade-up');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          // Stop observing once visible
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
-    });
-
-    fadeElements.forEach(el => observer.observe(el));
-  </script>
+  fadeEls.forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
