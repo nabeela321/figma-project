@@ -399,6 +399,11 @@
       margin-top: 18px;
       opacity: 0.5;
     }
+    .vector-left {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }
 
     /* =============================================
        SECTION 2 – WHY COMPLIANCE MATTERS
@@ -499,6 +504,7 @@
     .section2__right {
       display: flex;
       flex-direction: column;
+      margin-top: 91px;
     }
 
     /* Description paragraph
@@ -737,6 +743,7 @@
      SECTION 1 – HERO
 ============================================= -->
 <section class="hero" aria-labelledby="heroHeading">
+ 
   <div class="container">
     <div class="hero__inner">
 
@@ -808,7 +815,11 @@
      SECTION 2 – WHY COMPLIANCE MATTERS
 ============================================= -->
 <section class="section2" aria-labelledby="section2Heading">
-
+ <img
+    src="assets/Group.svg"
+    alt="vector"
+    class="vector-left"
+  />
   <svg class="section2__curl" viewBox="0 0 50 80" fill="none" aria-hidden="true">
     <path d="M45 5 C58 22 60 50 38 68 C22 82 4 76 2 60"
       stroke="#3D52D5" stroke-width="2.2" stroke-linecap="round" fill="none"/>
